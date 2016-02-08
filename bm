@@ -1,0 +1,56 @@
+#!/usr/bin/perl
+
+# this is a re-implementation of the foxy script in perl
+# your bookmarks in plain text, powered by perl.
+# January 2016
+# mr.dwts aT gmail com
+
+use strict;
+use warnings;
+use Getopt::Long;
+use Pod::Usage;
+use Encode;
+use IO::File;
+
+my ($h, @s, @a);
+
+my $bmfile = "/home/pid/projects/bmfile.txt";
+
+my $usage_message = <<END_MESSAGE;
+ Usage: bm [-h][-t][-c][-a URI tag1...tagn][-s tag][-c tag][-d tag]
+  options:
+    -h, --help show this message.
+    -t, --tags list all used bookmark tags.
+    -c, --count return total number of unique tags.
+    -a [URI] tag1...tagn, --add [URI] tag1...tagn add a new bookmark.
+            -s tag search bookmarks tagged with `tag'
+        -d tag print all bookmarks tagged with `tag' then choose on of them for deleting
+        For more details see subfix(1) manual page.
+END_MESSAGE
+
+sub usage { print $usage_message }
+
+GetOptions(
+#"convert=s{2}" => \@c,
+#"strip=s{2}" => \@s,
+        "help" => \$h,
+        "search=s{,2}" => \@s,
+        "add" => \@a,
+)
+or die usage;
+
+usage() if $h;
+
+if (@s) {
+        search_tag($s[0]);
+}
+
+if (@a) {
+        print("wtf is cracking dude?\n");
+}
+
+sub search_tag {
+        my ($searching_tag)= @_; 
+        print "You searched for $searching_tag\n";
+        
+}
